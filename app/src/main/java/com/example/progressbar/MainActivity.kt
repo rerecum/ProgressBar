@@ -32,7 +32,13 @@ class MainActivity : AppCompatActivity() {
                 textToAdd.text="$element"
                 runOnUiThread { findViewById<LinearLayout>(R.id.unsorted).addView(textToAdd) }
             }
-
+            val listSorted:List<Int> = sortWithProgress(ListToSort, findViewById(R.id.progressBar))
+            runOnUiThread { findViewById<TextView>(R.id.time).text="Czas sortowania: ${"%.2f".format((System.currentTimeMillis()-currentTime).toDouble()/1000)} sekund" }
+            for (element in listSorted) {
+                val textToAdd = TextView(baseContext)
+                textToAdd.text = "$element"
+                runOnUiThread { findViewById<LinearLayout>(R.id.sorted).addView(textToAdd) }
+            }
         }
     }
 }
